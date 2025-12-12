@@ -1,6 +1,11 @@
 /* EXPRESS SETUP  */
 const express = require('express');
 const app = express();
+app.use((req, res, next) => {
+  console.log('REQ:', req.method, req.url);
+  next();
+});
+
 
 app.use(express.static(__dirname));
 
@@ -27,9 +32,9 @@ app.use(passport.session());
 /* MONGOOSE SETUP */
 
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
+const passportLocalMongoose = require('passport-local-mongoose').default;
 
-mongoose.connect('mongodb://localhost/MyDatabase',
+mongoose.connect('mongodb://127.0.0.1:27017/MyDatabase',
     { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Schema = mongoose.Schema;
@@ -100,3 +105,10 @@ app.get('/logout',
         )
     }
 );
+
+
+/* REGISTER SOME USERS */
+
+/*UserDetails.register({ username: 'paul', active: false }, 'paul');
+UserDetails.register({ username: 'joy', active: false }, 'joy');
+UserDetails.register({ username: 'ray', active: false }, 'ray'); */
