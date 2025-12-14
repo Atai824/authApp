@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <title>Home</title>
@@ -16,13 +17,15 @@
     <script>
         const req = new XMLHttpRequest();
         req.onreadystatechange = function () {
-            if (req.readyState === 4 && req.status === 200) {
+            if (req.readyState == 4 && req.status == 200) {
                 const user = JSON.parse(req.response).user;
-                document.getElementById("welcome-message").innerText = `Welcome ${user.username}!`;
+                document.getElementById("welcome-message").innerText =
+                    `Welcome ${user.username}!`;
             }
         };
         req.open("GET", "http://localhost:3000/user", true);
         req.send();
     </script>
 </body>
+
 </html>
